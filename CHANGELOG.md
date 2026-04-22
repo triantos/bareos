@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- dir/sd/fd: JSON output for `status` commands under `.api json`. Adds
+  JSON emission for `status director`, `status scheduler`,
+  `status client=X`, `status storage=X`, and a new aggregator
+  `status jobid=N` that returns a single document combining the
+  director's view with the targeted FD and SD `.status json` replies.
+  Intended for monitoring UIs (refs bareos/bareos#2325).
+
+### Changed
+- fd: bumped FD protocol to version 55 (capability advertisement for
+  JSON status output).
+- sd: introduced versioned hello handshake (SD_VERSION_1), allowing the
+  director to gate JSON status requests on SD capability. Older
+  (unversioned) SD hello replies remain accepted as SD_VERSION_0.
+
 ## [25.0.3] - 2026-04-01
 
 ### Changed
